@@ -1,11 +1,9 @@
-from telethon.sync import TelegramClient, events
+from telethon import TelegramClient
 
-with TelegramClient('name', 1151409, 06ed8b1b54e3f6e001cf9e9078392a1b) as client:
-   client.send_message('me', 'Hello, myself!')
-   print(client.download_profile_photo('me'))
+# Use your own values from my.telegram.org
+api_id = 1086018
+api_hash = '3c2f1a043c1a22d5b0af74b8268993d5c'
 
-   @client.on(events.NewMessage(pattern='(?i).*Hello'))
-   async def handler(event):
-      await event.reply('Hey!')
-
-   client.run_until_disconnected()
+# The first parameter is the .session file name (absolute paths allowed)
+with TelegramClient('anon', api_id, api_hash) as client:
+    client.loop.run_until_complete(client.send_message('me', 'Hello, myself!'))
